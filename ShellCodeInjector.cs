@@ -68,7 +68,7 @@ namespace RemoteShinjectLowlevel
 
             // Grab the right PID
             //change :)
-            string targetedProc = "notepad"; // I'm sure it won't work if notepad is not open
+            string targetedProc = "explorer"; // I'm sure it won't work if notepad is not open
             int procId = Process.GetProcessesByName(targetedProc).First().Id;
 
             // Get a handle on the remote process
