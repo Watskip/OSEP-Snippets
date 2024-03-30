@@ -7,19 +7,6 @@ namespace RemoteShinjectLowlevel
 {
     class Program
     {
-        // FOR DEBUGGING
-        [DllImport("kernel32.dll")]
-        static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, [Out] byte[] lpBuffer, int dwSize, out IntPtr lpNumberOfBytesRead);
-
-        [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
-        static extern int memcmp(byte[] b1, byte[] b2, long count);
-
-        static bool ByteArrayCompare(byte[] b1, byte[] b2)
-        {
-            return b1.Length == b2.Length && memcmp(b1, b2, b1.Length) == 0;
-        }
-        // END DEBUGGING
-
         public const uint ProcessAllFlags = 0x001F0FFF;
         public const uint GenericAll = 0x10000000;
         public const uint PageReadWrite = 0x04;
